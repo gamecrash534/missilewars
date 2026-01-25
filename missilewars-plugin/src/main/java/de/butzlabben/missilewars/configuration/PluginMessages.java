@@ -162,8 +162,13 @@ public class PluginMessages {
         ARENA_NOT_HIGHER("arena.not_higher", "&cYou can not go higher."),
         ARENA_KICK_INACTIVITY("arena.kick_inactivity", "&cYou were inactive on MissileWars."),
 
-        DIED_NORMAL("died.normal", "&7%player% &7died."),
-        DIED_EXPLOSION("died.explosion", "&7%player% &7was blown up."),
+        DIED_EXPLOSION_TNT("died.explosion_tnt", "%player_displayname% &7was blown up by TNT."),
+        DIED_EXPLOSION_MINECART("died.explosion_minecart", "%player_displayname% &7was blown up by a TNT minecart."),
+        DIED_PROJECTILE_FIREBALL("died.projectile_fireball", "%player_displayname% &7was hit by a fireball from %killer_displayname%&7."),
+        DIED_PROJECTILE_ARROW("died.projectile_arrow", "%player_displayname% &7was shot by %killer_displayname% &7with an arrow."),
+        DIED_ENTITY_ATTACK("died.entity_attack", "%player_displayname% &7was killed in PVP by %killer_displayname%&7."),
+        DIED_FALL("died.fall", "%player_displayname% &7has fallen to his death."),
+        DIED_DEFAULT("died.default", "%player_displayname% &7died."),
 
         FALL_PROTECTION_START("fall_protection.start", "&cFall protection inactive in %seconds% seconds."),
         FALL_PROTECTION_END("fall_protection.end", "&cFall protection inactive."),

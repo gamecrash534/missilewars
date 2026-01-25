@@ -210,30 +210,17 @@ public class GameListener extends GameBoundListener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onDeath(PlayerDeathEvent event) {
-        if (!isInGameWorld(event.getEntity().getLocation())) return;
+        if (!isInGameWorld(event.getPlayer().getLocation())) return;
 
-        Player player = event.getEntity();
+        Player player = event.getPlayer();
         MWPlayer mwPlayer = getGame().getPlayer(player);
         Team team = mwPlayer.getTeam();
-
-        // check the death cause for choice the death message
+        
         if (team.getTeamType() == TeamType.PLAYER) {
-
-            if (player.getLastDamageCause() == null) return;
-
-            String deathBroadcast;
-            EntityDamageEvent.DamageCause damageCause = player.getLastDamageCause().getCause();
-
-            if (damageCause == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION || damageCause == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION) {
-                deathBroadcast = PluginMessages.getMessage(true, PluginMessages.MessageEnum.DIED_EXPLOSION).replace("%player%", player.getDisplayName());
-            } else {
-                deathBroadcast = PluginMessages.getMessage(true, PluginMessages.MessageEnum.DIED_NORMAL).replace("%player%", player.getDisplayName());
-            }
-
-            getGame().broadcast(deathBroadcast);
+            getGame().getDeathMsgHandler().sendDeathMessage(player);
+            event.setDeathMessage(null);
         }
-
-        event.setDeathMessage(null);
+        
         player.setLevel(0);
         
         if (getGame().getArenaConfig().isAutoRespawn()) getGame().autoRespawnPlayer(mwPlayer);
