@@ -95,6 +95,7 @@ public class Game {
     private GameJoinManager gameJoinManager;
     private GameLeaveManager gameLeaveManager;
     private GameBoundListener listener;
+    private DeathMessageHandler deathMsgHandler;
     private EquipmentManager equipmentManager;
     private TaskManager taskManager;
     private int remainingGameDuration;
@@ -240,6 +241,8 @@ public class Game {
         taskManager.setTimer(new GameTimer(this, arenaConfig.getGameDuration() * 60));
         taskManager.runTimer(5, 20);
         state = GameState.INGAME;
+        
+        deathMsgHandler = new DeathMessageHandler(this);
 
         timestart = System.currentTimeMillis();
 
