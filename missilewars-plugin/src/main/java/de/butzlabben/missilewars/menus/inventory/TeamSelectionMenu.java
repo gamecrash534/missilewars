@@ -3,6 +3,7 @@ package de.butzlabben.missilewars.menus.inventory;
 import com.github.stefvanschie.inventoryframework.gui.GuiItem;
 import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import com.github.stefvanschie.inventoryframework.pane.OutlinePane;
+import com.github.stefvanschie.inventoryframework.pane.util.Slot;
 import de.butzlabben.missilewars.configuration.Config;
 import de.butzlabben.missilewars.game.Game;
 import de.butzlabben.missilewars.game.TeamManager;
@@ -69,9 +70,9 @@ public class TeamSelectionMenu {
     public void openMenu() {
         gui = new ChestGui(3, getTitle());
         
-        pane1 = new OutlinePane(2, 1, 1, 1);
-        pane2 = new OutlinePane(6, 1, 1, 1);
-        paneSpec = new OutlinePane(4, 1, 1, 1);
+        pane1 = new OutlinePane(1, 1);
+        pane2 = new OutlinePane(1, 1);
+        paneSpec = new OutlinePane(1, 1);
         
         updateGuiItems(mwPlayer);
         
@@ -115,9 +116,9 @@ public class TeamSelectionMenu {
         });
         
         
-        gui.addPane(pane1);
-        gui.addPane(pane2);
-        gui.addPane(paneSpec);
+        gui.addPane(Slot.fromXY(2, 1), pane1);
+        gui.addPane(Slot.fromXY(6, 1), pane2);
+        gui.addPane(Slot.fromXY(4, 1), paneSpec);
         
         gui.show(mwPlayer.getPlayer());
     }

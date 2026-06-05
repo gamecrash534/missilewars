@@ -5,6 +5,7 @@ import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import com.github.stefvanschie.inventoryframework.pane.OutlinePane;
 import com.github.stefvanschie.inventoryframework.pane.PaginatedPane;
 import com.github.stefvanschie.inventoryframework.pane.component.PercentageBar;
+import com.github.stefvanschie.inventoryframework.pane.util.Slot;
 import de.butzlabben.missilewars.configuration.Config;
 import de.butzlabben.missilewars.configuration.arena.ArenaConfig;
 import de.butzlabben.missilewars.game.Game;
@@ -54,9 +55,9 @@ public class MapVoteMenu {
         }
         
         gui = new ChestGui(6, getTitle());
-        paginatedPane = new PaginatedPane(0, 0, 9, 6);
-        
-        gui.addPane(paginatedPane);
+        paginatedPane = new PaginatedPane(9, 6);
+
+        gui.addPane(Slot.fromXY(0, 0), paginatedPane);
     }
     
     public void openMenu() {
@@ -70,15 +71,15 @@ public class MapVoteMenu {
     
     private void updateGuiItems() {
         
-        backwards = new OutlinePane(3, 5, 1, 1);
-        forwards = new OutlinePane(5, 5, 1, 1);
+        backwards = new OutlinePane(1, 1);
+        forwards = new OutlinePane(1, 1);
         
         int maxPages = (int) Math.ceil(game.getGameConfig().getArenas().size() / 5d);
         int offset = 0;
         for (int page = 1; page <= maxPages; page++) {
             
             // vertical arena item list for vote:
-            OutlinePane arenas = new OutlinePane(0, 0, 1, 5);
+            OutlinePane arenas = new OutlinePane(1, 5);
             
             PercentageBar voteResultBar;
             
@@ -100,7 +101,7 @@ public class MapVoteMenu {
                 arenas.addItem(new GuiItem(item));
                 
                 // vote percent display
-                voteResultBar = new PercentageBar(1, n - 1, 8, 1);
+                voteResultBar = new PercentageBar(8, 1);
                 voteResultBar.setPercentage((float) (game.getMapVoting().getPercentOf(arenaConfig) / 100));
                 
                 ItemStack impactDisplayItem = new ItemStack(Material.YELLOW_STAINED_GLASS_PANE);
@@ -113,7 +114,7 @@ public class MapVoteMenu {
                 MenuItem.hideMetaValues(backgroundItem);
                 voteResultBar.setBackgroundItem(new GuiItem(backgroundItem));
                 
-                paginatedPane.addPane(page - 1, voteResultBar);
+                paginatedPane.addPane(page - 1, Slot.fromXY(1, n - 1), voteResultBar);
             }
             
             
@@ -154,9 +155,9 @@ public class MapVoteMenu {
             });
             
             
-            paginatedPane.addPane(page - 1, arenas);
-            paginatedPane.addPane(page - 1, backwards);
-            paginatedPane.addPane(page - 1, forwards);
+            paginatedPane.addPane(page - 1, Slot.fromXY(0, 0), arenas);
+            paginatedPane.addPane(page - 1, Slot.fromXY(3, 5), backwards);
+            paginatedPane.addPane(page - 1, Slot.fromXY(5, 5), forwards);
             offset++;
         }
         
