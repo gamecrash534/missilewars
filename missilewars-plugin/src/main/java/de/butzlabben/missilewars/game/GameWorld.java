@@ -26,10 +26,7 @@ import java.io.IOException;
 import lombok.Getter;
 import lombok.ToString;
 import org.apache.commons.io.FileUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.GameRule;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
+import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
@@ -42,6 +39,7 @@ public class GameWorld {
     private final Game game;
     private final Object lock = new Object();
     private String worldName;
+    private File associatedPath;
 
     public GameWorld(Game game, String templateName) {
         this.templateName = templateName;
@@ -97,6 +95,7 @@ public class GameWorld {
                 Logger.WARN.log("Could not delete old world!");
                 file.delete();
             }
+            FileUtils.deleteQuietly(associatedPath);
         }
     }
 
@@ -125,6 +124,8 @@ public class GameWorld {
             Logger.DEBUG.log("Loading new gameworld");
             World world = Bukkit.createWorld(new WorldCreator(worldName));
             Bukkit.getWorlds().add(world);
+
+            associatedPath = world.getWorldFolder();
             
             Logger.DEBUG.log("Worlds: " + Bukkit.getWorlds());
 

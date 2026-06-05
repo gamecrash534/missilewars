@@ -312,7 +312,10 @@ public class Game {
             teleportToFallbackSpawn(mwPlayer.getPlayer());
         }
 
-        if (gameWorld != null) gameWorld.unload();
+        if (gameWorld != null) {
+            gameWorld.unload();
+            gameWorld.delete();
+        }
     }
     
     public void resetGame() {
@@ -519,7 +522,6 @@ public class Game {
         player.playSound(fb.getLocation(), Sound.ITEM_FLINTANDSTEEL_USE, 100.0F, 1.0F);
         fb.setYield(3F);
         fb.setIsIncendiary(true);
-        fb.setBounce(false);
     }
 
     public void setArena(ArenaConfig arenaConfig) {
