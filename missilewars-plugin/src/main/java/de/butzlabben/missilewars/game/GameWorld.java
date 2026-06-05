@@ -129,8 +129,8 @@ public class GameWorld {
             
             Logger.DEBUG.log("Worlds: " + Bukkit.getWorlds());
 
-            world.setGameRule(GameRule.DO_TILE_DROPS, game.getArenaConfig().isDoTileDrops());
-            world.setGameRule(GameRule.KEEP_INVENTORY, game.getArenaConfig().isKeepInventory());
+            world.setGameRule(GameRules.BLOCK_DROPS, game.getArenaConfig().isDoTileDrops());
+            world.setGameRule(GameRules.KEEP_INVENTORY, game.getArenaConfig().isKeepInventory());
         }
     }
 

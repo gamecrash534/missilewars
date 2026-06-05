@@ -295,7 +295,7 @@ public class Game {
         if (Config.isSetup()) return;
 
         if (restart) {
-            Bukkit.getServer().spigot().restart();
+            Bukkit.getServer().restart();
             return;
         }
 
