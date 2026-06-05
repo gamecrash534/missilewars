@@ -51,9 +51,9 @@ public class MWPlayer implements Runnable {
     private PlayerEquipmentRandomizer playerEquipmentRandomizer;
     @Setter
     private boolean playerInteractEventCancel = false;
-    private GameJoinMenu gameJoinMenu;
-    private MapVoteMenu mapVoteMenu;
-    private TeamSelectionMenu teamSelectionMenu;
+    private final GameJoinMenu gameJoinMenu;
+    private final MapVoteMenu mapVoteMenu;
+    private final TeamSelectionMenu teamSelectionMenu;
     private long lastTeamChangeTime = 0;
 
     public MWPlayer(Player player, Game game) {

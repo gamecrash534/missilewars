@@ -16,8 +16,7 @@ import de.redstoneworld.redutilities.items.HeadHelper;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MapVoteMenu {
     
@@ -28,7 +27,7 @@ public class MapVoteMenu {
     private final MenuUtils menuUtils;
     ChestGui gui;
     
-    PaginatedPane paginatedPane;
+    final PaginatedPane paginatedPane;
     
     OutlinePane backwards;
     OutlinePane forwards;
@@ -70,7 +69,9 @@ public class MapVoteMenu {
     }
     
     private void updateGuiItems() {
-        
+        // reset GUI to circumvent ConcurrentModificationException occurring when the GUI is updated while still open
+        paginatedPane.clear();
+
         backwards = new OutlinePane(1, 1);
         forwards = new OutlinePane(1, 1);
         
